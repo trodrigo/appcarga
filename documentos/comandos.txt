@@ -1,0 +1,118 @@
+# Iniciar projeto
+yarn init -y
+
+# Adicionando o typescript
+# -D == Somente  em desenvolvimento
+yarn add typescript -D
+
+# Iniciar o typescript
+yarn tsc --init
+
+# Mudar a configuração no arquivo tsconfig.json para false
+"strict": true
+
+# Converter para javascript
+yarn tsc
+
+# Rodar o projeto
+node index.js
+
+# Instalar o framework express
+yarn add express
+
+# Adicionando dependencias do express
+yarn add @types/express -D
+
+# Automatizando o transcompilaçao para javascript
+yarn add ts-node-dev -D
+
+# Criando scripts no package.json
+  "scripts": {
+    "dev": "ts-node-dev src/server.ts"
+  },
+
+# Instalando o typeORM - https://typeorm.io/#/
+yarn add typeorm reflect-metadata mysql
+
+# Utilizando e configurando ormconfig
+Exemple:
+{
+    "type": "mysql",
+    "host": "localhost",
+    "port": 3306,
+    "username": "appcarga",
+    "password": "ths@2021solutions",
+    "database": "appcarga",
+    "migrations": "src/database/migrations/*.ts",
+    "cli": {
+        "migrationDir": "src/database/migrations"
+    }
+}
+
+# # UtilizandoConfigurando package.js
+  "scripts": {
+    "dev": "ts-node-dev src/server.ts",
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
+  },
+
+# Criando uma migration
+yarn typeorm migration:create -n CreateUsers
+
+# Executando as migrations
+yarn typeorm migration:run
+
+# Removendo as migrations
+yarn typeorm migration:revert
+
+# Automatizando criação de entidades
+yarn typeorm entity:create -n User
+
+# Habilitando configurações necessárias no tsconfig.ys
+"experimentalDecorators": true,                   /* Enable experimental support for TC39 stage 2 draft decorators. */
+"emitDecoratorMetadata": true,                    /* Emit design-type metadata for decorated declarations in source files. */
+"strictPropertyInitialization": false,            /* Check for class properties that are declared but not set in the constructor. */
+
+
+# Instalando biblioteca UUID
+yarn add uuid
+yarn @types/uuid -D
+
+# Instalando biblioteca para erros assincronos no express
+yarn add express-async-errors
+
+# Criando uma migration - Tags
+yarn typeorm migration:create -n CreateTags
+
+# Instalando a biblioteca JWT 
+yarn add jsonwebtoken
+yarn add @types/jsonwebtoken -D
+
+# Adiconando um novo atributo na tabela
+yarn typeorm migration:create -n AlterUserAddPassword
+
+# Adicionando a biblioteca bcryptjs
+yarn add bcryptjs
+yarn add @types/bcryptjs -D
+
+# Sobrescrevendo a tipagem do Request
+Cria-se uma pasta @types
+Cria-se uma subPasta express
+Cria-se um arquivo index.d.ts
+Exemplo:
+declare namespace Express {
+    export interface Request {
+        user_id: string;
+    }
+}
+
+Habilitar no arquivo tsconfig.js o atributo typeRoots
+    "typeRoots": [
+      "./src/@types"
+    ]
+
+# Instalando a biblioteca class-transformer
+yarn add class-transformer
+
+# Instalando o cors
+yarn add cors
+yarn add @types/cors
