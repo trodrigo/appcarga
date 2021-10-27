@@ -1,0 +1,29 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "appcarga",
+		"version": "1.0.0",
+		"license": {
+			"name": "MIT"
+		},
+		"contact": {
+			"name": "Rodrigo ",
+			"email": "tr.rodrigo@gmail.com"
+		}
+	},
+	"openapi": "3.0.0",
+	"paths": {},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}

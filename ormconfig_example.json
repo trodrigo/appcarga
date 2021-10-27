@@ -2,12 +2,17 @@
     "type": "mysql",
     "host": "localhost",
     "port": 3306,
-    "username": "USER",
-    "password": "PASSWORD",
-    "database": "DATABASE_NAME",
+    "username": "user_database",
+    "password": "password_database",
+    "database": "name_database",
     "migrations": [
         "src/database/migrations/*.ts"
     ],
+    "entities": [
+        "src/entities/*.ts"
+    ],
+    "logging": true,
+    "synchronize": true,
     "cli": {
         "migrationsDir": "src/database/migrations",
         "entitiesDir": "src/entities"

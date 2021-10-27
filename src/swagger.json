@@ -1,0 +1,82 @@
+{
+  "openapi": "3.0.0",
+  "title": "3.0.0",
+  "info": {
+    "title": "API de controle de carga",
+    "description": "Controle de quantidade de carga diária",
+    "termsOfService": "http://localhost:3000/terms",
+    "contact": {
+      "email": "tr.rodrigo@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/v1",
+      "description": "API de teste"
+    },
+    {
+      "url": "http://localhost:3003/v2",
+      "description": "API de produção"
+    }
+  ],
+  "paths": {
+    "/company": {
+      "post": {
+        "sumary": "Cadastro de Empresa",
+        "description": "Rota para cadastro de empresa",
+        "tags": [
+          "Company"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Company"
+              },
+              "examples": {
+                "company": {
+                  "value": {
+                    "cnpj": "012123123000112",
+                    "corporate_name": "Empresa de Transporte SA",
+                    "fantasy_name": "Empresa de Transporte",
+                    "active": "true",
+                    "company_type": 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Company": {
+        "type": "object",
+        "properties": {
+          "cnpj": {
+            "type": "string"
+          },
+          "corporate_name": {
+            "type": "string"
+          },
+          "fantasy_name": {
+            "type": "string"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "company_type": {
+            "type": "integer",
+            "default": "1 - Contratante 2 - Contratada"
+          },
+          "id": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }
+}

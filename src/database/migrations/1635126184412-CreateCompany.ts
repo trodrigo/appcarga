@@ -11,6 +11,7 @@ export class CreateCompany1635126184412 implements MigrationInterface {
                         name: "id",
                         type: "integer",
                         isPrimary: true,
+                        isGenerated: true,
                         generationStrategy: "increment"
                     },
                     {

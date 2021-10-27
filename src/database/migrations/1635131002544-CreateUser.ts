@@ -10,7 +10,9 @@ export class CreateUser1635131002544 implements MigrationInterface {
                     {
                         name: "id",
                         type: "integer",
-                        isPrimary: true
+                        isPrimary: true,
+                        isGenerated: true,
+                        generationStrategy: "increment"
                     },
                     {
                         name: "company_id",
@@ -18,7 +20,7 @@ export class CreateUser1635131002544 implements MigrationInterface {
                     },
                     {
                         name: "email",
-                        type: "varchar"
+                        type: "varchar(200)"
                     },
                     {
                         name: "password",
