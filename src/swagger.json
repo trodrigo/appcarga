@@ -23,10 +23,15 @@
   "paths": {
     "/company": {
       "post": {
-        "sumary": "Cadastro de Empresa",
+        "summary": "Cadastro de Empresa",
         "description": "Rota para cadastro de empresa",
         "tags": [
           "Company"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
         ],
         "requestBody": {
           "content": {
@@ -43,6 +48,224 @@
                     "active": "true",
                     "company_type": 1
                   }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Company Already exists"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Company"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/company/findByName": {
+      "get": {
+        "description": "Busca por um CNPJ de empresa",
+        "summary": "Busca por um CNPJ de empresa",
+        "tags": [
+          "Company"
+        ],
+        "parameters": [
+          {
+            "name": "fantasy_name",
+            "in": "query",
+            "description": "Nome da empresa",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Company"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/company/findByCNPJ": {
+      "get": {
+        "description": "Busca por um CNPJ de empresa",
+        "summary": "Busca por um CNPJ de empresa",
+        "tags": [
+          "Company"
+        ],
+        "parameters": [
+          {
+            "name": "cnpj",
+            "in": "query",
+            "description": "CNPJ da empresa",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Company"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/company/{id}": {
+      "get": {
+        "description": "Busca empresa por ID",
+        "summary": "Busca empresa por ID",
+        "tags": [
+          "Company"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da empresa",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Company"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Alterar empresa por ID",
+        "summary": "Alterar empresa por ID",
+        "tags": [
+          "Company"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID da empresa",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Company"
+              },
+              "examples": {
+                "company": {
+                  "value": {
+                    "cnpj": "012123123000112",
+                    "corporate_name": "Empresa Irmãos Coragem SA",
+                    "fantasy_name": "Empresa  Irmãos Coragem",
+                    "active": "true",
+                    "company_type": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Company"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user": {
+      "post": {
+        "summary": "Cadastro de Usuário",
+        "description": "Rota para cadastro de usuário",
+        "tags": [
+          "User"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "company": {
+                  "value": {
+                    "company_id": 1,
+                    "email": "teste@empresa.com.br",
+                    "password": "fulanodetal@123",
+                    "name": "Fulano de Tal",
+                    "access_level": 1,
+                    "active": "true"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "400": {
+            "description": "Usuário Already exists"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
                 }
               }
             }
@@ -76,6 +299,40 @@
             "type": "integer"
           }
         }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "company_id": {
+            "type": "integer"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "access_level": {
+            "type": "integer",
+            "default": "0 - Adm 1 - Gerente"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }

@@ -1,5 +1,6 @@
 import { createConnection } from "typeorm";
 import { CompanyRepositories } from "../repositories/CompanyRepositories";
+import { Utils } from "../libraries/Utils";
 
 interface ICompanyRequest {
   cnpj: string;
@@ -18,9 +19,14 @@ class CreateCompanyService {
 
     const connection = await createConnection();
     const companyRepository = connection.getCustomRepository(CompanyRepositories);
+    const utils = new Utils();
 
     if (!cnpj) {
       throw new Error("CNPJ incorreto");
+    }
+
+    if (!utils.validaCnpj(cnpj)) {
+      throw new Error("CNPJ inválido");
     }
 
     const companyAlreadyExits = await companyRepository.findOne({

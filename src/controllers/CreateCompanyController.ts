@@ -8,7 +8,6 @@ class CreateCompanyController {
       fantasy_name,
       active,
       company_type } = request.body;
-    console.log(cnpj);
 
     const createCompanyService = new CreateCompanyService();
 
