@@ -1,8 +1,8 @@
-import { createConnection } from "typeorm";
+import { connect } from "../connections/Connect";
 import { CompanyRepositories } from "../repositories/CompanyRepositories";
 import { UserRepositories } from "../repositories/UserRepositories";
 import { Utils } from "../libraries/Utils";
-
+import { hash } from "bcryptjs";
 
 interface IUserRequest {
   company_id: number;
@@ -21,11 +21,10 @@ class CreateUserService {
     password,
     name,
     access_level,
-    active
+    active = true
   }: IUserRequest) {
-    const connection = await createConnection();
-    const userRepository = connection.getCustomRepository(UserRepositories);
-    const companyRepository = connection.getCustomRepository(CompanyRepositories);
+    const userRepository = (await connect).getCustomRepository(UserRepositories);
+    const companyRepository = (await connect).getCustomRepository(CompanyRepositories);
     const utils = new Utils();
 
     if (!email) {
@@ -50,10 +49,11 @@ class CreateUserService {
       throw Error("Empresa não encontrada");
     }
 
+    const passwordHash = await hash(password, 8);
     const user = userRepository.create({
       company_id,
       email,
-      password,
+      password: passwordHash,
       name,
       access_level,
       active

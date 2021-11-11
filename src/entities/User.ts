@@ -3,9 +3,9 @@ import { Exclude } from "class-transformer";
 import { Company } from "./Company";
 
 @Entity("users")
-class User {
+export class User {
     @PrimaryGeneratedColumn()
-    readonly id: string;
+    readonly id: number;
 
     @Column()
     company_id: number;
@@ -37,5 +37,3 @@ class User {
     updated_ad: Date;
 
 }
-
-export { User };
