@@ -13,8 +13,8 @@ export class SendMail {
       port: 587,
       secure: true,
       auth: {
-        user: "tr.rodrigo@gmail.com",
-        pass: "RedTeam@123",
+        user: "teste@gmail.com",
+        pass: "teste@123",
       },
       tls: {
         rejectUnauthorized: false,
