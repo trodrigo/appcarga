@@ -5,8 +5,9 @@ class PasswordRecoveryController {
   async handle(request: Request, response: Response) {
     const { email } = request.body;
     const passwordRecoveryService = new PasswordRecoveryService();
-
-    return response.json(passwordRecoveryService.execute(email));
+    const message = await passwordRecoveryService.execute(email)
+    console.log(message);
+    return response.json(message);
   }
 }
 

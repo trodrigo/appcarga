@@ -5,15 +5,15 @@ import { UserRepositories } from "../repositories/UserRepositories";
 class PasswordRecoveryService {
   async execute(email: string) {
     const userRepository = (await connect).getCustomRepository(UserRepositories);
-    const user = userRepository.findOne(email);
-
+    const user = await userRepository.findOne(email);
+    console.log(email);
     if (!user) {
-      throw new Error("E-mail não encontrado");
+      throw Error("E-mail não encontrado");
     }
 
     const sendEmail = new SendMail();
     const mailObj = {
-      from: 'tr.rodrigo@gmail.com',
+      from: 'tarciorodrigo@yahoo.com',
       to: email,
       subject: "Recuperação de senha",
       text: "Clique no link: http://localhost:3000/recovery ou copie e cole em seu navegador \n" +
@@ -21,7 +21,9 @@ class PasswordRecoveryService {
     };
 
     try {
-      return await sendEmail.send(mailObj)
+      const message = await sendEmail.send(mailObj);
+      console.log(message);
+      return message;
     } catch {
       throw new Error("Erro ao enviar e-mail");
     }

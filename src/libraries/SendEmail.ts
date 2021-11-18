@@ -9,12 +9,12 @@ interface ISendMail {
 export class SendMail {
   async send({ from, to, subject, text }: ISendMail) {
     const sender = createTransport({
-      host: "smtp.gmail.com",
-      port: 587,
+      host: "smtp.mail.yahoo.com",
+      port: 465,
       secure: true,
       auth: {
-        user: "teste@gmail.com",
-        pass: "teste@123",
+        user: "tarciorodrigo@yahoo.com",
+        pass: "vnqlrdicsflbyxju",
       },
       tls: {
         rejectUnauthorized: false,
@@ -33,7 +33,7 @@ export class SendMail {
         //console.log(error);
         throw new Error(error.message);
       } else {
-        console.log("E-mail enviado com sucesso");
+        //console.log("E-mail enviado com sucesso");
         return "E-mail enviado com sucesso";
       }
     });
